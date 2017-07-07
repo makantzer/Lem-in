@@ -6,7 +6,7 @@
 /*   By: mkantzer <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/06/16 10:50:18 by mkantzer          #+#    #+#             */
-/*   Updated: 2017/06/27 19:41:08 by mkantzer         ###   ########.fr       */
+/*   Updated: 2017/07/07 16:41:33 by mkantzer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,9 @@ int		parse(void)
 	char *line;
 	t_lstr	*lstr;
 
-	line = ft_strnew(0);
+	//line = ft_strnew(0);
 	init_info(&info);
+	lstr = NULL;
 	if (nb_ants(&info) == 0)
 		return (0);
 	while ((ret = get_next_line(0, &line) > 0))
@@ -28,7 +29,10 @@ int		parse(void)
 		if (line[0] == '#')
 			sharp_line(line, &info);
 		else
-			room_pipe(line, &info, &lstr);
+		{
+			if(!room_pipe(line, &info, &lstr))
+				return (0);
+		}
 		//ft_printf("%s\n", line);
 		//print_room(lstr);
 		ft_strdel(&line);
@@ -40,17 +44,46 @@ int		parse(void)
 int		room_pipe(char *line, t_parse *info, t_lstr **lstr)
 {
 	t_lstr	*new;
+
 	new = create_room();
+	print_info(info);
+	//Ici faire recuperation salle
+	if (!get_room(&new, line))
+		return (1);
 	start_end(info, &new);
-	new->coord_x = 3;
+	/*new->coord_x = 3;
 	new->coord_y = 4;
 	new->i = 0;
-	new->name = "test";
+	new->name = "test";*/
 	add_room(lstr, new);
 	line = "toto";
-	ft_printf("room_pipe\n");
-	//print_room(*lstr);
+	//ft_printf("room_pipe\n");
+	print_room(*lstr);
 	return(0);
+}
+
+int		get_room(t_lstr **new, char *line)
+{
+	char **data;
+	int i;
+
+	i = 0;
+	data = ft_strsplit(line, ' ');
+	while (data[i])
+	{
+		ft_printf("%s\n", data[i]);
+		i++;
+	}
+	ft_printf("i = %i\n", i);
+	if (i != 2)
+	{
+		ft_printf("toto\n");
+		return (0);
+	}
+	(*new)->name = data[0];
+	(*new)->coord_x = ft_atoi(data[1]);
+	(*new)->coord_y = ft_atoi(data[2]);
+	return (1);
 }
 
 void	start_end(t_parse *info, t_lstr **lstr)
@@ -115,4 +148,14 @@ void	init_info(t_parse *info)
 	info->end = 0;
 	info->end_next = 0;
 	info->nb_ants = 0;
+}
+
+void	print_info(t_parse *info)
+{
+	ft_printf("Info struct :\n");
+	ft_printf(" start = %i\n", info->start);
+	ft_printf(" start_next = %i\n", info->start_next);
+	ft_printf(" end = %i\n", info->end);
+	ft_printf(" end_next = %i\n", info->end_next);
+	ft_printf(" nb_ants = %i\n", info->nb_ants);
 }

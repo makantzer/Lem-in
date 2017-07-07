@@ -6,7 +6,7 @@
 /*   By: mkantzer <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/06/26 14:57:29 by mkantzer          #+#    #+#             */
-/*   Updated: 2017/06/27 19:37:02 by mkantzer         ###   ########.fr       */
+/*   Updated: 2017/07/07 15:28:37 by mkantzer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,11 +57,18 @@ void 	add_link(t_link **link, t_link *new)
 	t_link *tmp;
 
 	if (!link || !new)
-		return ;
+	{
+		ft_printf("1\n");
+		return;
+	}
 	if (!(*link))
+	{
 		*link = new;
+		ft_printf("2\n");
+	}
 	else
 	{
+		ft_printf("3\n");
 		tmp = *link;
 		*link = new;
 		new->next = tmp;
@@ -84,14 +91,14 @@ void	print_room(t_lstr *room)
 		ft_printf("  start = %i\n", room->start);
 		ft_printf("  end = %i\n", room->end);
 		j = 0;
-		while (room->link)
+		/*while (room->link)
 		{
 			//ft_printf("j = %i\n", j);
 			ft_printf(" Link nº%i\n", room->link->i);
 			ft_printf("  adress = %p\n", room->link->adress);
 			room->link = room->link->next;
 			j++;
-		}
+		}*/
 		ft_printf("\n");
 		room = room->next;
 		i++;
