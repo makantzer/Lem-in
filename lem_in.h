@@ -6,7 +6,7 @@
 /*   By: mkantzer <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/06/16 10:53:12 by mkantzer          #+#    #+#             */
-/*   Updated: 2017/07/07 16:14:58 by mkantzer         ###   ########.fr       */
+/*   Updated: 2017/07/08 17:34:02 by mkantzer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,6 +58,8 @@ void	start_end(t_parse *info, t_lstr **lstr);
 void	init_info(t_parse *info);
 void	print_info(t_parse *info);
 int		get_room(t_lstr **new, char *line);
+int		get_pipe(t_lstr **lstr, char *line);
+t_lstr	*find_room(t_lstr **lstr, char *name);
 
 
 /*

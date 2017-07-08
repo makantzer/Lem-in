@@ -6,7 +6,7 @@
 /*   By: mkantzer <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/06/16 10:50:18 by mkantzer          #+#    #+#             */
-/*   Updated: 2017/07/07 16:41:33 by mkantzer         ###   ########.fr       */
+/*   Updated: 2017/07/08 20:22:19 by mkantzer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,14 @@ int		parse(void)
 			sharp_line(line, &info);
 		else
 		{
-			if(!room_pipe(line, &info, &lstr))
+			ft_printf("%s\n", line);
+			if (ft_strchr(line, '-') != NULL)
+			{
+				ft_printf("toto\n");
+				if (!get_pipe(&lstr, line))
+					return (0);
+			}
+			if (!room_pipe(line, &info, &lstr))
 				return (0);
 		}
 		//ft_printf("%s\n", line);
@@ -46,22 +53,62 @@ int		room_pipe(char *line, t_parse *info, t_lstr **lstr)
 	t_lstr	*new;
 
 	new = create_room();
-	print_info(info);
+	//print_info(info);
 	//Ici faire recuperation salle
 	if (!get_room(&new, line))
-		return (1);
+		return (0);
 	start_end(info, &new);
-	/*new->coord_x = 3;
-	new->coord_y = 4;
-	new->i = 0;
-	new->name = "test";*/
 	add_room(lstr, new);
-	line = "toto";
-	//ft_printf("room_pipe\n");
-	print_room(*lstr);
-	return(0);
+	//print_room(*lstr);
+	return(1);
+}
+//Faire une fonction de fin qui check si il y a un start et un end et qu'ils etaient differents.
+
+t_lstr	*find_room(t_lstr **lstr, char *name)
+{
+	while (lstr)
+	{
+		ft_printf("%s\n", (*lstr)->name);
+		if ((*lstr)->name == name)
+		{
+			ft_printf("%p\n", lstr);
+			return (*lstr);
+		}
+		*lstr = (*lstr)->next;
+	}
+	return (NULL);
 }
 
+int		get_pipe(t_lstr **lstr, char *line)
+{
+	char **data;
+	int i;
+	t_lstr	*from;
+	t_lstr	*to;
+	//t_link	link;
+
+	i = 0;
+	data = ft_strsplit(line, '-');
+	while (data[i])
+		i++;
+	ft_printf("%i\n", i);
+	if (i != 1)
+		return (0);
+	from = find_room(lstr, data[0]);
+	to = find_room(lstr, data[1]);
+	ft_printf("from - %p\nto - %p\n", from, to);
+	/*if (from != NULL && to != NULL)
+	{
+		link = create_link(find_room(lstr, data[1]), 1);
+		add_link((*lstr)->link, link);
+	}
+	else
+		return (0);*/
+	print_room(*lstr);
+	//Faire l'inverse (les directions n'ont pas de sens)
+	// /!\. Sans tmp le deplacement dans la liste chaine est garde.
+	return (1);
+}
 int		get_room(t_lstr **new, char *line)
 {
 	char **data;
@@ -70,16 +117,9 @@ int		get_room(t_lstr **new, char *line)
 	i = 0;
 	data = ft_strsplit(line, ' ');
 	while (data[i])
-	{
-		ft_printf("%s\n", data[i]);
 		i++;
-	}
-	ft_printf("i = %i\n", i);
-	if (i != 2)
-	{
-		ft_printf("toto\n");
+	if (i != 3)
 		return (0);
-	}
 	(*new)->name = data[0];
 	(*new)->coord_x = ft_atoi(data[1]);
 	(*new)->coord_y = ft_atoi(data[2]);
