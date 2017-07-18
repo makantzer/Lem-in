@@ -6,7 +6,7 @@
 /*   By: mkantzer <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/06/16 10:53:12 by mkantzer          #+#    #+#             */
-/*   Updated: 2017/07/08 17:34:02 by mkantzer         ###   ########.fr       */
+/*   Updated: 2017/07/18 17:15:28 by mkantzer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,7 @@ typedef struct		s_parse
 	int		end;
 	int		end_next;
 	int		nb_ants;
+	int		tube;
 }					t_parse;
 
 /*
@@ -59,17 +60,18 @@ void	init_info(t_parse *info);
 void	print_info(t_parse *info);
 int		get_room(t_lstr **new, char *line);
 int		get_pipe(t_lstr **lstr, char *line);
-t_lstr	*find_room(t_lstr **lstr, char *name);
+int		add_pipe(t_lstr **lstr, t_lstr *from, t_lstr *to, char **data);
+t_lstr	*find_room(t_lstr *lstr, char *name);
 
 
 /*
- ** parse.c
+ ** list.c
 */
 
 void	add_room(t_lstr **lst_r, t_lstr *new);
 void	add_link(t_link **link, t_link *new);
 void	print_room(t_lstr *room);
 t_lstr	*create_room();
-t_link	*create_link(t_lstr **lstr, int i);
+t_link	*create_link(t_lstr *lstr, int i);
 
 #endif
