@@ -6,7 +6,7 @@
 /*   By: mkantzer <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/06/26 14:57:29 by mkantzer          #+#    #+#             */
-/*   Updated: 2017/07/18 17:31:30 by mkantzer         ###   ########.fr       */
+/*   Updated: 2017/07/19 11:13:13 by mkantzer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,14 +84,14 @@ void	print_room(t_lstr *room)
 		ft_printf("  start = %i\n", room->start);
 		ft_printf("  end = %i\n", room->end);
 		j = 0;
-		/*while (room->link)
+		while (room->link)
 		{
 			//ft_printf("j = %i\n", j);
 			ft_printf(" Link nº%i\n", room->link->i);
 			ft_printf("  adress = %p\n", room->link->adress);
 			room->link = room->link->next;
 			j++;
-		}*/
+		}
 		ft_printf("\n");
 		room = room->next;
 		i++;
