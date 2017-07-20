@@ -6,7 +6,7 @@
 /*   By: mkantzer <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/06/16 10:53:12 by mkantzer          #+#    #+#             */
-/*   Updated: 2017/07/19 11:56:29 by mkantzer         ###   ########.fr       */
+/*   Updated: 2017/07/19 14:00:48 by mkantzer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ typedef struct		s_parse
  ** parse.c
 */
 
-int		parse(void);
+int		parse(t_lstr **lstr);
 void	sharp_line(char *line, t_parse *info);
 int		nb_ants(t_parse *info);
 int		room_pipe(char *line, t_parse *info, t_lstr **lstr);

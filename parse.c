@@ -6,22 +6,20 @@
 /*   By: mkantzer <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/06/16 10:50:18 by mkantzer          #+#    #+#             */
-/*   Updated: 2017/07/19 12:14:49 by mkantzer         ###   ########.fr       */
+/*   Updated: 2017/07/20 14:27:00 by mkantzer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "lem_in.h"
 
-int		parse(void)
+int		parse(t_lstr **lstr)
 {
-	int		ret;
 	t_parse	info;
-	char *line;
-	t_lstr	*lstr;
+	int		ret;
+	char	*line;
 
 	//line = ft_strnew(0);
 	init_info(&info);
-	lstr = NULL;
 	if (nb_ants(&info) == 0)
 		return (0);
 	while ((ret = get_next_line(0, &line) > 0))
@@ -29,8 +27,10 @@ int		parse(void)
 		if (line[0] == '#')
 			sharp_line(line, &info);
 		else
-			if (!room_pipe(line, &info, &lstr))
+		{
+			if (!room_pipe(line, &info, lstr))
 				return (0);
+		}
 		ft_putendl(line);
 		ft_strdel(&line);
 	}
@@ -57,17 +57,56 @@ int		room_pipe(char *line, t_parse *info, t_lstr **lstr)
 	else
 	{
 		info->tube = 1;
-		//Deux appel avec la meme ligne donc normal que ca recommence TEUBE
-		get_pipe(lstr,line);
-		print_room(*lstr);
-		//if (!get_pipe(lstr, line))
-		//	return (0);
+		if (!get_pipe(lstr, line))
+			return (0);
 	}
-	//Si print_room ici segfault, ??Parce que room print link ?? == OUI ! 
-	//print_room(*lstr);
 	return (1);
 }
-//Faire une fonction de fin qui check si il y a un start et un end et qu'ils etaient differents.
+
+int		get_pipe(t_lstr **lstr, char *line)
+{
+	char	**data;
+	t_lstr	*from;
+	t_lstr	*to;
+	int		i;
+
+	i = 0;
+	data = ft_strsplit(line, '-');
+	while (data[i])
+		i++;
+	if (i != 2)
+		return (0);
+	from = find_room(*lstr, data[0]);
+	to = find_room(*lstr, data[1]);
+	if (find_link(*lstr, from) != NULL && find_link(*lstr, to) != NULL)
+		return (1);
+	if (from != NULL && to != NULL)
+		add_pipe(lstr, from, to);
+	else
+		return (0);
+	return (1);
+}
+
+int		add_pipe(t_lstr **lstr, t_lstr *from, t_lstr *to)
+{
+	t_link	*link1;
+	t_link	*link2;
+	t_lstr	*tmp;
+
+	tmp = *lstr;
+	link1 = create_link(from, 1);
+	link2 = create_link(to, 1);
+	while (tmp)
+	{
+		if (tmp == from)
+			add_link((&(tmp)->link), link2);
+		if (tmp == to)
+			add_link((&(tmp)->link), link1);
+		tmp = (tmp)->next;
+	}
+	return (1);
+}
+
 int		final_check(t_parse info)
 {
 	if (info.start == 0)
@@ -105,9 +144,8 @@ t_link	*find_link(t_lstr *lstr, t_lstr *to_find)
 	{
 		while (lstr->link)
 		{
-			ft_printf("%p = %p\n", lstr->link->adress, to_find);
 			if (lstr->link->adress == to_find)
-				return(lstr->link);
+				return (lstr->link);
 			lstr->link = lstr->link->next;
 		}
 		lstr = lstr->next;
@@ -115,54 +153,10 @@ t_link	*find_link(t_lstr *lstr, t_lstr *to_find)
 	return (NULL);
 }
 
-int		get_pipe(t_lstr **lstr, char *line)
-{
-	char **data;
-	int i;
-	t_lstr	*from;
-	t_lstr	*to;
-
-	i = 0;
-	data = ft_strsplit(line, '-');
-	while (data[i])
-		i++;
-	if (i != 2)
-		return (0);
-	from = find_room(*lstr, data[0]);
-	to = find_room(*lstr, data[1]);
-	if (find_link(*lstr, from) != NULL && find_link(*lstr, from) != NULL)
-			return (1);
-	if (from != NULL && to != NULL)
-		add_pipe(lstr, from, to);
-	else
-		return (0);
-	return (1);
-}
-
-int		add_pipe(t_lstr **lstr, t_lstr *from, t_lstr *to)
-{
-	t_link	*link1;
-	t_link	*link2;
-	t_lstr	*tmp;
-
-	tmp = *lstr;
-	link1 = create_link(from, 1);
-	link2 = create_link(to, 1);
-	while (*lstr)
-	{
-		if (*lstr == from)
-			add_link((&(*lstr)->link), link2);
-		if (*lstr == to)
-			add_link((&(*lstr)->link), link1);
-		*lstr = (*lstr)->next;
-	}
-	*lstr = tmp;
-	return (1);
-}
 int		get_room(t_lstr **new, char *line)
 {
-	char **data;
-	int i;
+	char	**data;
+	int		i;
 
 	i = 0;
 	data = ft_strsplit(line, ' ');
