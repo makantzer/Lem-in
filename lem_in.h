@@ -6,7 +6,7 @@
 /*   By: mkantzer <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/06/16 10:53:12 by mkantzer          #+#    #+#             */
-/*   Updated: 2017/07/20 18:00:56 by mkantzer         ###   ########.fr       */
+/*   Updated: 2017/07/20 18:09:25 by mkantzer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,9 +55,14 @@ int		parse(t_lstr **lstr);
 void	sharp_line(char *line, t_parse *info);
 int		nb_ants(t_parse *info);
 int		start_end(t_parse *info, t_lstr **lstr);
+int		final_check(t_parse info, t_lstr **lstr);
+
+/*
+ **	find.c
+*/
+
 t_lstr	*find_room(t_lstr *lstr, char *name);
 t_link	*find_link(t_lstr *lstr, t_lstr *to_find);
-int		final_check(t_parse info, t_lstr **lstr);
 
 /*
  ** room_pipe.c
