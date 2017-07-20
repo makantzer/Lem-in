@@ -6,7 +6,7 @@
 /*   By: mkantzer <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/06/16 10:53:12 by mkantzer          #+#    #+#             */
-/*   Updated: 2017/07/19 14:00:48 by mkantzer         ###   ########.fr       */
+/*   Updated: 2017/07/20 18:00:56 by mkantzer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,16 +54,26 @@ typedef struct		s_parse
 int		parse(t_lstr **lstr);
 void	sharp_line(char *line, t_parse *info);
 int		nb_ants(t_parse *info);
-int		room_pipe(char *line, t_parse *info, t_lstr **lstr);
-void	start_end(t_parse *info, t_lstr **lstr);
-void	init_info(t_parse *info);
-void	print_info(t_parse *info);
-int		get_room(t_lstr **new, char *line);
-int		get_pipe(t_lstr **lstr, char *line);
-int		add_pipe(t_lstr **lstr, t_lstr *from, t_lstr *to);
+int		start_end(t_parse *info, t_lstr **lstr);
 t_lstr	*find_room(t_lstr *lstr, char *name);
 t_link	*find_link(t_lstr *lstr, t_lstr *to_find);
-int		final_check(t_parse info);
+int		final_check(t_parse info, t_lstr **lstr);
+
+/*
+ ** room_pipe.c
+*/
+
+int		room_pipe(char *line, t_parse *info, t_lstr **lstr);
+int		get_room(t_lstr **lstr, t_lstr **new, char *line);
+int		get_pipe(t_lstr **lstr, char *line);
+int		add_pipe(t_lstr **lstr, t_lstr *from, t_lstr *to);
+
+/*
+ ** tools.c
+*/
+
+void	init_info(t_parse *info);
+int		check_alpha(char *str);
 
 /*
  ** list.c

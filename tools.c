@@ -1,42 +1,37 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_atoi.c                                          :+:      :+:    :+:   */
+/*   tools.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mkantzer <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/11/09 09:59:01 by mkantzer          #+#    #+#             */
-/*   Updated: 2017/07/20 16:08:54 by mkantzer         ###   ########.fr       */
+/*   Created: 2017/07/20 17:57:34 by mkantzer          #+#    #+#             */
+/*   Updated: 2017/07/20 17:59:14 by mkantzer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "lem_in.h"
 
-int		ft_atoi(const char *str)
+void	init_info(t_parse *info)
 {
-	int nb;
+	info->start = 0;
+	info->start_next = 0;
+	info->end = 0;
+	info->end_next = 0;
+	info->nb_ants = 0;
+	info->tube = 0;
+}
+
+int		check_alpha(char *str)
+{
 	int i;
-	int n;
 
 	i = 0;
-	nb = 0;
-	n = 0;
-	while (ft_isspace(str[i]))
-		i++;
-	if ((str[i] <= 90 && str[i] >= 65) || (str[i] <= 122 && str[i] >= 97))
-		return (0);
-	if (str[i] == 45 || str[i] == 43)
+	while (str[i])
 	{
-		if (str[i] == 45)
-			n = 1;
+		if (ft_isalpha(str[i]))
+			return (0);
 		i++;
 	}
-	while (str[i] <= 57 && str[i] >= 48)
-	{
-		nb = (nb * 10) + (str[i] - 48);
-		i++;
-	}
-	if (n == 1)
-		nb = nb * -1;
-	return (nb);
+	return (1);
 }

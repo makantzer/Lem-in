@@ -1,42 +1,39 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_atoi.c                                          :+:      :+:    :+:   */
+/*   find.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mkantzer <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/11/09 09:59:01 by mkantzer          #+#    #+#             */
-/*   Updated: 2017/07/20 16:08:54 by mkantzer         ###   ########.fr       */
+/*   Created: 2017/07/20 18:04:42 by mkantzer          #+#    #+#             */
+/*   Updated: 2017/07/20 18:05:12 by mkantzer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "lem_in.h"
 
-int		ft_atoi(const char *str)
+t_lstr	*find_room(t_lstr *lstr, char *name)
 {
-	int nb;
-	int i;
-	int n;
+	while (lstr)
+	{
+		if (!(ft_strcmp(lstr->name, name)))
+			return (lstr);
+		lstr = lstr->next;
+	}
+	return (NULL);
+}
 
-	i = 0;
-	nb = 0;
-	n = 0;
-	while (ft_isspace(str[i]))
-		i++;
-	if ((str[i] <= 90 && str[i] >= 65) || (str[i] <= 122 && str[i] >= 97))
-		return (0);
-	if (str[i] == 45 || str[i] == 43)
+t_link	*find_link(t_lstr *lstr, t_lstr *to_find)
+{
+	while (lstr)
 	{
-		if (str[i] == 45)
-			n = 1;
-		i++;
+		while (lstr->link)
+		{
+			if (lstr->link->adress == to_find)
+				return (lstr->link);
+			lstr->link = lstr->link->next;
+		}
+		lstr = lstr->next;
 	}
-	while (str[i] <= 57 && str[i] >= 48)
-	{
-		nb = (nb * 10) + (str[i] - 48);
-		i++;
-	}
-	if (n == 1)
-		nb = nb * -1;
-	return (nb);
+	return (NULL);
 }

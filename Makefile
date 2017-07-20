@@ -6,13 +6,16 @@
 #    By: mkantzer <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/04/19 15:03:23 by mkantzer          #+#    #+#              #
-#    Updated: 2017/06/26 14:59:50 by mkantzer         ###   ########.fr        #
+#    Updated: 2017/07/20 18:05:22 by mkantzer         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = lem-in
 SRC = parse.c\
 	  main.c\
+	  find.c\
+	  tools.c\
+	  room_pipe.c\
 	  list.c
 CFLAGS = -Wall -Werror -Wextra
 $(NAME): $(SRC)
