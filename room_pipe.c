@@ -6,7 +6,7 @@
 /*   By: mkantzer <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/20 18:01:42 by mkantzer          #+#    #+#             */
-/*   Updated: 2017/07/20 18:02:54 by mkantzer         ###   ########.fr       */
+/*   Updated: 2017/07/21 14:38:27 by mkantzer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,7 @@ int		get_room(t_lstr **lstr, t_lstr **new, char *line)
 	(*new)->name = data[0];
 	if (!(check_alpha(data[1])) || !(check_alpha(data[2])))
 		return (0);
+	(*new)->visit = 0;
 	(*new)->coord_x = ft_atoi(data[1]);
 	(*new)->coord_y = ft_atoi(data[2]);
 	return (1);
@@ -88,8 +89,8 @@ int		add_pipe(t_lstr **lstr, t_lstr *from, t_lstr *to)
 	t_lstr	*tmp;
 
 	tmp = *lstr;
-	link1 = create_link(from, 1);
-	link2 = create_link(to, 1);
+	link1 = create_link(from);
+	link2 = create_link(to);
 	while (tmp)
 	{
 		if (tmp == from)

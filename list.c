@@ -6,20 +6,19 @@
 /*   By: mkantzer <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/06/26 14:57:29 by mkantzer          #+#    #+#             */
-/*   Updated: 2017/07/20 14:14:26 by mkantzer         ###   ########.fr       */
+/*   Updated: 2017/07/21 11:04:56 by mkantzer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "lem_in.h"
 
-t_link	*create_link(t_lstr *lstr, int i)
+t_link	*create_link(t_lstr *lstr)
 {
 	t_link *new;
 
 	new = (t_link*)malloc(sizeof(t_link));
 	if (!new)
 		return (NULL);
-	new->i = i;
 	new->adress = lstr;
 	new->next = NULL;
 	return (new);
@@ -79,8 +78,8 @@ void	print_room(t_lstr *room)
 	tmp = room;
 	while(room)
 	{
-		ft_printf("i = %i\n", i);
-		printf("Maillon nº%i a l'adresse %p\n", room->i, room);
+		printf("Maillon nº%i a l'adresse %p\n", i, room);
+		ft_printf("  visit = %i\n", room->visit);
 		ft_printf("  name = %s\n", room->name);
 		ft_printf("  coord_x = %i\n", room->coord_x);
 		ft_printf("  coord_y = %i\n", room->coord_y);
@@ -91,7 +90,7 @@ void	print_room(t_lstr *room)
 		while (tmp2)
 		{
 			//ft_printf("j = %i\n", j);
-			printf(" Link nº%i\n", tmp2->i);
+			printf(" Link nº%i\n", j);
 			printf("  adress = %p\n", tmp2->adress);
 			tmp2 = tmp2->next;
 			j++;

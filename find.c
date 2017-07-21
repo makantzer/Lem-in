@@ -6,7 +6,7 @@
 /*   By: mkantzer <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/20 18:04:42 by mkantzer          #+#    #+#             */
-/*   Updated: 2017/07/20 18:05:12 by mkantzer         ###   ########.fr       */
+/*   Updated: 2017/07/21 14:38:21 by mkantzer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,15 +25,20 @@ t_lstr	*find_room(t_lstr *lstr, char *name)
 
 t_link	*find_link(t_lstr *lstr, t_lstr *to_find)
 {
-	while (lstr)
+	t_lstr	*tmp;
+	t_link	*tmp2;
+
+	tmp = lstr;
+	while (tmp)
 	{
-		while (lstr->link)
+		tmp2 = tmp->link;
+		while (tmp2)
 		{
-			if (lstr->link->adress == to_find)
-				return (lstr->link);
-			lstr->link = lstr->link->next;
+			if (tmp2->adress == to_find)
+				return (tmp2);
+			tmp2 = tmp2->next;
 		}
-		lstr = lstr->next;
+		tmp = tmp->next;
 	}
 	return (NULL);
 }

@@ -6,7 +6,7 @@
 /*   By: mkantzer <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/06/16 10:53:12 by mkantzer          #+#    #+#             */
-/*   Updated: 2017/07/20 18:09:25 by mkantzer         ###   ########.fr       */
+/*   Updated: 2017/07/21 11:04:24 by mkantzer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,12 +18,12 @@
 
 typedef	struct		s_lstr
 {
-	int		i;
 	int		coord_x;
 	int		coord_y;
 	int		start;
 	int		end; 
 	char 	*name;
+	int		visit;
 	struct s_link *link;
 	struct s_lstr *next;
 	
@@ -31,7 +31,6 @@ typedef	struct		s_lstr
 
 typedef	struct		s_link
 {
-	int		i;
 	t_lstr	*adress;
 	struct s_link *next;
 	
@@ -88,6 +87,6 @@ void	add_room(t_lstr **lst_r, t_lstr *new);
 void	add_link(t_link **link, t_link *new);
 void	print_room(t_lstr *room);
 t_lstr	*create_room();
-t_link	*create_link(t_lstr *lstr, int i);
+t_link	*create_link(t_lstr *lstr);
 
 #endif
