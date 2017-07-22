@@ -6,13 +6,14 @@
 #    By: mkantzer <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/04/19 15:03:23 by mkantzer          #+#    #+#              #
-#    Updated: 2017/07/20 18:05:22 by mkantzer         ###   ########.fr        #
+#    Updated: 2017/07/22 11:00:35 by mkantzer         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = lem-in
 SRC = parse.c\
 	  main.c\
+	  algo.c\
 	  find.c\
 	  tools.c\
 	  room_pipe.c\

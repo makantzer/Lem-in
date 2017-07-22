@@ -6,7 +6,7 @@
 /*   By: mkantzer <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/06/16 10:52:28 by mkantzer          #+#    #+#             */
-/*   Updated: 2017/07/20 14:27:35 by mkantzer         ###   ########.fr       */
+/*   Updated: 2017/07/22 21:23:20 by mkantzer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@ int		main(void)
 		exit(0);
 	}
 	print_room(lstr);
+	waiting_list(&lstr);
 	//freeeeeeeeeeeeeeeeeee
 	return (1);
 }

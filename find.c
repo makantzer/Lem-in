@@ -6,7 +6,7 @@
 /*   By: mkantzer <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/20 18:04:42 by mkantzer          #+#    #+#             */
-/*   Updated: 2017/07/21 14:38:21 by mkantzer         ###   ########.fr       */
+/*   Updated: 2017/07/22 21:23:00 by mkantzer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ t_lstr	*find_room(t_lstr *lstr, char *name)
 	return (NULL);
 }
 
-t_link	*find_link(t_lstr *lstr, t_lstr *to_find)
+t_link	*find_link(t_lstr *lstr, t_lstr *to_find, t_lstr *to_check)
 {
 	t_lstr	*tmp;
 	t_link	*tmp2;
@@ -31,13 +31,31 @@ t_link	*find_link(t_lstr *lstr, t_lstr *to_find)
 	tmp = lstr;
 	while (tmp)
 	{
-		tmp2 = tmp->link;
-		while (tmp2)
+		if (tmp == to_check)
 		{
-			if (tmp2->adress == to_find)
-				return (tmp2);
-			tmp2 = tmp2->next;
+			tmp2 = tmp->link;
+			while (tmp2)
+			{
+				if (tmp2->adress == to_find)
+					return (tmp2);
+				tmp2 = tmp2->next;
+			}
+			return (NULL);
 		}
+		tmp = tmp->next;
+	}
+	return (NULL);
+}
+
+t_lstr	*find_start(t_lstr *lstr)
+{
+	t_lstr *tmp;
+
+	tmp = lstr;
+	while (tmp)
+	{
+		if (tmp->start == 1)
+			return (tmp);
 		tmp = tmp->next;
 	}
 	return (NULL);

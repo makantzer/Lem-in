@@ -6,7 +6,7 @@
 /*   By: mkantzer <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/06/16 10:53:12 by mkantzer          #+#    #+#             */
-/*   Updated: 2017/07/21 11:04:24 by mkantzer         ###   ########.fr       */
+/*   Updated: 2017/07/22 21:19:19 by mkantzer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,14 @@ typedef	struct		s_link
 	
 }					t_link;
 
+typedef	struct		s_wait
+{
+	t_lstr	*room;
+	t_lstr	*origin;
+	struct s_wait *next;
+	
+}					t_wait;
+
 typedef struct		s_parse
 {
 	int		start;
@@ -61,7 +69,17 @@ int		final_check(t_parse info, t_lstr **lstr);
 */
 
 t_lstr	*find_room(t_lstr *lstr, char *name);
-t_link	*find_link(t_lstr *lstr, t_lstr *to_find);
+t_lstr	*find_start(t_lstr *lstr);
+t_link	*find_link(t_lstr *lstr, t_lstr *to_find, t_lstr *to_check);
+
+/*
+ **	algo.c
+*/
+
+void	waiting_list(t_lstr **lstr);
+t_wait	*create_wl(t_lstr *room, t_lstr *origin);
+void	add_to_wl(t_wait **wl, t_wait *new);
+void	print_wl(t_wait *wl);
 
 /*
  ** room_pipe.c
