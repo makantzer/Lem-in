@@ -6,7 +6,7 @@
 /*   By: mkantzer <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/06/16 10:53:12 by mkantzer          #+#    #+#             */
-/*   Updated: 2017/07/22 21:19:19 by mkantzer         ###   ########.fr       */
+/*   Updated: 2017/07/24 21:01:17 by mkantzer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,8 +39,8 @@ typedef	struct		s_link
 typedef	struct		s_wait
 {
 	t_lstr	*room;
-	t_lstr	*origin;
-	struct s_wait *next;
+	struct s_wait	*origin;
+	struct s_wait	*next;
 	
 }					t_wait;
 
@@ -76,8 +76,8 @@ t_link	*find_link(t_lstr *lstr, t_lstr *to_find, t_lstr *to_check);
  **	algo.c
 */
 
-void	waiting_list(t_lstr **lstr);
-t_wait	*create_wl(t_lstr *room, t_lstr *origin);
+void	waiting_list(t_lstr **lstr, t_wait **wl, t_wait **t_last);
+t_wait	*create_wl(t_lstr *room, t_wait *origin);
 void	add_to_wl(t_wait **wl, t_wait *new);
 void	print_wl(t_wait *wl);
 
@@ -96,6 +96,14 @@ int		add_pipe(t_lstr **lstr, t_lstr *from, t_lstr *to);
 
 void	init_info(t_parse *info);
 int		check_alpha(char *str);
+
+/*
+ ** print.c
+*/
+
+char	**to_tab(t_wait **wl_last);
+char	**fill_result(char **result, t_wait **wl_last, int i);
+void	print_result(char **result, t_parse **info);
 
 /*
  ** list.c

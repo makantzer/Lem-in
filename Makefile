@@ -6,7 +6,7 @@
 #    By: mkantzer <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/04/19 15:03:23 by mkantzer          #+#    #+#              #
-#    Updated: 2017/07/22 11:00:35 by mkantzer         ###   ########.fr        #
+#    Updated: 2017/07/24 19:32:55 by mkantzer         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -15,6 +15,7 @@ SRC = parse.c\
 	  main.c\
 	  algo.c\
 	  find.c\
+	  print.c\
 	  tools.c\
 	  room_pipe.c\
 	  list.c
