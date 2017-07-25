@@ -6,7 +6,7 @@
 /*   By: mkantzer <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/06/16 10:53:12 by mkantzer          #+#    #+#             */
-/*   Updated: 2017/07/24 21:01:17 by mkantzer         ###   ########.fr       */
+/*   Updated: 2017/07/25 14:57:54 by mkantzer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,7 @@ typedef struct		s_parse
  ** parse.c
 */
 
-int		parse(t_lstr **lstr);
+int		parse(t_lstr **lstr, t_parse *info);
 void	sharp_line(char *line, t_parse *info);
 int		nb_ants(t_parse *info);
 int		start_end(t_parse *info, t_lstr **lstr);
@@ -101,9 +101,9 @@ int		check_alpha(char *str);
  ** print.c
 */
 
-char	**to_tab(t_wait **wl_last);
+char	**to_tab(t_wait **wl_last, t_parse *info);
 char	**fill_result(char **result, t_wait **wl_last, int i);
-void	print_result(char **result, t_parse **info);
+void	print_result(char **result, t_parse *info, int result_size);
 
 /*
  ** list.c

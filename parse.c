@@ -6,36 +6,35 @@
 /*   By: mkantzer <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/06/16 10:50:18 by mkantzer          #+#    #+#             */
-/*   Updated: 2017/07/24 21:01:50 by mkantzer         ###   ########.fr       */
+/*   Updated: 2017/07/25 13:57:30 by mkantzer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "lem_in.h"
 
-int		parse(t_lstr **lstr)
+int		parse(t_lstr **lstr, t_parse *info)
 {
-	t_parse	info;
 	int		ret;
 	char	*line;
 
 	//line = ft_strnew(0);
-	init_info(&info);
-	if (nb_ants(&info) == 0)
+	init_info(info);
+	if (nb_ants(info) == 0)
 		return (0);
 	while ((ret = get_next_line(0, &line) > 0))
 	{
 		if (line[0] == '#')
-			sharp_line(line, &info);
+			sharp_line(line, info);
 		else
 		{
-			if (!room_pipe(line, &info, lstr))
+			if (!room_pipe(line, info, lstr))
 				return (0);
 		}
 		ft_putendl(line);
 		ft_strdel(&line);
 	}
 	ft_strdel(&line);
-	if (!final_check(info, lstr))
+	if (!final_check(*info, lstr))
 		return (0);
 	return (1);
 }
@@ -105,6 +104,7 @@ int		nb_ants(t_parse *info)
 	if (nb <= 0 || nb == 2147483647)
 		return (0);
 	info->nb_ants = nb;
+	ft_putendl(line);
 	ft_strdel(&line);
 	return (1);
 }
