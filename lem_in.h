@@ -6,7 +6,7 @@
 /*   By: mkantzer <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/06/16 10:53:12 by mkantzer          #+#    #+#             */
-/*   Updated: 2017/07/25 14:57:54 by mkantzer         ###   ########.fr       */
+/*   Updated: 2017/07/27 17:41:57 by mkantzer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ typedef struct		s_parse
 	int		start_next;
 	int		end;
 	int		end_next;
-	int		nb_ants;
+	size_t	nb_ants;
 	int		tube;
 }					t_parse;
 
@@ -103,7 +103,10 @@ int		check_alpha(char *str);
 
 char	**to_tab(t_wait **wl_last, t_parse *info);
 char	**fill_result(char **result, t_wait **wl_last, int i);
-void	print_result(char **result, t_parse *info, int result_size);
+void	print_result(char **result, t_parse *info, int result_size, int current);
+void	print_second(char **result, t_parse *info, int result_size);
+char	*add_ants(int size, char **ants);
+char	*pop_ants(int size, char **ants);
 
 /*
  ** list.c

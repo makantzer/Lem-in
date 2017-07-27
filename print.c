@@ -6,7 +6,7 @@
 /*   By: mkantzer <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/24 17:11:42 by mkantzer          #+#    #+#             */
-/*   Updated: 2017/07/25 17:28:37 by mkantzer         ###   ########.fr       */
+/*   Updated: 2017/07/27 17:45:12 by mkantzer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,8 @@ char	**to_tab(t_wait **wl_last, t_parse *info)
 	}
 	result = (char **)ft_memalloc((i + 1) * sizeof(char*));
 	result = fill_result(result, wl_last, i);
-	print_result(result, info, i);
+	//print_result(result, info, i, 0);
+	print_second(result, info, i);
 	return (result);
 }
 
@@ -49,38 +50,82 @@ char	**fill_result(char **result, t_wait **wl_last, int i)
 	return (result);
 }
 
-/*void	print_test()
+char	*add_ants(int size, char **ants)
 {
-	int l;
+	char	*new;
 
-	l = 0;
-	while (l < )
-}*/
+	new = ft_strnew(size + 2);
+	new = ft_strjoin(*ants, ft_itoa(size + 1));
+	//ft_strdel(ants);
+	return (new);
+}
 
-void	print_result(char **result, t_parse *info, int result_size)
+char 	*pop_ants(int size, char **ants)
 {
-	int i;
-	int	j;
-	int	k;
-	int	ants_count;
+	char *new;
+	
+	new = ft_strsub(*ants, 1, size - 1);
+	return(new);
+}
 
-	k = 0;
-	ants_count = 1;
-	i = 0;
-	j = 0;
-	ft_printf("\nnb ants = %i\n", info->nb_ants);
-	ft_printf("size_result = %i\n", result_size);
-	while (ants_count <= info->nb_ants)
+void	print_second(char **result, t_parse *info, int result_size)
+{
+	char	*ants;
+	size_t	j;
+	size_t	end;
+	int		start;
+	int		current;
+
+	current = 0;
+	end = 0;
+	start = 0;
+	ants = ft_strdup("1");
+	while (end < info->nb_ants - 1)
 	{
-		//ft_printf("i = %i\n", i);
-		k = 0;
-		while (k <= result_size)
+		j = 1;
+		if (start == result_size + 1)
 		{
-			ft_printf("k = %i\n", k);
-			ft_printf("L%i-%s\n", ants_count, result[k]);
-			k++;
+			ants = pop_ants(ft_strlen(ants), &ants);
+			start--;
+			end++;
 		}
-		ants_count++;
-		//i++;
+		current = start;
+		while (j <= ft_strlen(ants))
+			ft_printf("L%i-%s ", j++, result[current--]);
+		start++;
+		if (ft_strlen(ants) < info->nb_ants && start != result_size + 1)
+			ants = add_ants(ft_strlen(ants), &ants);
+		ft_putchar('\n');
 	}
+	ft_strdel(&ants);
+}
+
+void	print_result(char **result, t_parse *info, int result_size, int current)
+{
+	char	*ants;
+	size_t	j;
+	size_t	end;
+	int		start;
+
+	end = 0;
+	start = 0;
+	ants = ft_strdup("1");
+	while (end < info->nb_ants - 1)
+	{
+		j = 0;
+		if (start == result_size + 1)
+		{
+			ants = pop_ants(ft_strlen(ants), &ants);
+			start--;
+			end++;
+		}
+		current = start;
+		while (j < ft_strlen(ants))
+			ft_printf("L%c-%s ", ants[j++], result[current--]);
+		start++;
+		if (ft_strlen(ants) < info->nb_ants && start != result_size + 1)
+			ants = add_ants(ft_strlen(ants), &ants);
+		ft_putchar('\n');
+	}
+	ft_strdel(&ants);
 }

@@ -6,7 +6,7 @@
 /*   By: mkantzer <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/06/16 10:52:28 by mkantzer          #+#    #+#             */
-/*   Updated: 2017/07/25 15:04:38 by mkantzer         ###   ########.fr       */
+/*   Updated: 2017/07/27 14:56:40 by mkantzer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ int		main(void)
 	//print_wl(wl);
 	//print_wl(wl_last);
 	result = to_tab(&wl_last, &info);
-	///!\CHANGE TO TAB TO PRINT. 
+	///!\CHANGE TO_TAB TO PRINT. 
 	//freeeeeeeeeeeeeeeeeee
 	return (1);
 }
