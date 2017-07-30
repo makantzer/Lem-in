@@ -6,13 +6,13 @@
 /*   By: mkantzer <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/22 10:44:18 by mkantzer          #+#    #+#             */
-/*   Updated: 2017/07/24 19:56:39 by mkantzer         ###   ########.fr       */
+/*   Updated: 2017/07/30 16:12:48 by mkantzer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "lem_in.h"
 
-void	waiting_list(t_lstr **lstr, t_wait **wl, t_wait **tmp2)
+int		waiting_list(t_lstr **lstr, t_wait **wl, t_wait **tmp2)
 {
 	t_lstr	*start;
 	t_link	*tmp;
@@ -24,7 +24,7 @@ void	waiting_list(t_lstr **lstr, t_wait **wl, t_wait **tmp2)
 	while (*tmp2)
 	{
 		if ((*tmp2)->room->end == 1)
-			return ;
+			return (1);
 		tmp = (*tmp2)->room->link;
 		while (tmp)
 		{
@@ -38,6 +38,7 @@ void	waiting_list(t_lstr **lstr, t_wait **wl, t_wait **tmp2)
 		}
 		*tmp2 = (*tmp2)->next;
 	}
+	return (0);
 }
 
 void	add_to_wl(t_wait **wl, t_wait *new)

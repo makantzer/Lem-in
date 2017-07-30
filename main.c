@@ -6,7 +6,7 @@
 /*   By: mkantzer <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/06/16 10:52:28 by mkantzer          #+#    #+#             */
-/*   Updated: 2017/07/30 13:28:17 by mkantzer         ###   ########.fr       */
+/*   Updated: 2017/07/30 16:16:56 by mkantzer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,23 +18,21 @@ int		main(void)
 	t_wait	*wl;
 	t_wait	*wl_last;
 	t_parse	info;
-	char	**result;
 
 	lstr = NULL;
-	//info = NULL;
-	wl = NULL;
-	wl_last = NULL;
+	//wl = NULL;
+	//wl_last = NULL;
 	if (parse(&lstr, &info) == 0)
 	{
 		ft_printf("ERROR\n");
 		return (0);
 	}
-	//print_room(lstr);
-	waiting_list(&lstr, &wl, &wl_last);
-	//print_wl(wl);
-	//print_wl(wl_last);
-	result = to_tab(&wl_last, &info);
-	///!\CHANGE TO_TAB TO PRINT. 
+	if (waiting_list(&lstr, &wl, &wl_last) == 0)
+	{
+		ft_printf("ERROR\n");
+		return (0);
+	}
+	print_result(&wl_last, &info);
 	//freeeeeeeeeeeeeeeeeee
 	return (1);
 }

@@ -6,7 +6,7 @@
 /*   By: mkantzer <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/06/16 10:53:12 by mkantzer          #+#    #+#             */
-/*   Updated: 2017/07/30 12:10:27 by mkantzer         ###   ########.fr       */
+/*   Updated: 2017/07/30 16:11:00 by mkantzer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ typedef struct		s_parse
 	int		start_next;
 	int		end;
 	int		end_next;
-	size_t	nb_ants;
+	int		nb_ants;
 	int		tube;
 }					t_parse;
 
@@ -76,7 +76,7 @@ t_link	*find_link(t_lstr *lstr, t_lstr *to_find, t_lstr *to_check);
  **	algo.c
 */
 
-void	waiting_list(t_lstr **lstr, t_wait **wl, t_wait **t_last);
+int		waiting_list(t_lstr **lstr, t_wait **wl, t_wait **t_last);
 t_wait	*create_wl(t_lstr *room, t_wait *origin);
 void	add_to_wl(t_wait **wl, t_wait *new);
 void	print_wl(t_wait *wl);
@@ -101,12 +101,10 @@ int		check_alpha(char *str);
  ** print.c
 */
 
-char	**to_tab(t_wait **wl_last, t_parse *info);
+void	print_result(t_wait **wl_last, t_parse *info);
 char	**fill_result(char **result, t_wait **wl_last, int i);
-void	print_result(char **result, t_parse *info, int result_size, int current);
-void	print_second(char **result, t_parse *info, int result_size, int nb_ants);
-char	*add_ants(int size, char **ants);
-char	*pop_ants(int size, char **ants);
+void	print_ants(char **result, t_parse *info, int result_size);
+void	print_line(int nb_ants, char **result, int room, int ants_base);
 
 /*
  ** list.c
