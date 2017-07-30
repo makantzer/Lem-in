@@ -6,7 +6,7 @@
 /*   By: mkantzer <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/20 11:42:19 by mkantzer          #+#    #+#             */
-/*   Updated: 2017/03/31 09:24:09 by mkantzer         ###   ########.fr       */
+/*   Updated: 2017/07/30 19:43:51 by mkantzer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,7 +96,7 @@ char	*c_handler(t_spec spec, char c)
 
 	str = ft_strnew(2);
 	if (c == 0)
-		str[0] = 255;
+		str[0] = -1;
 	else
 		str[0] = c;
 	str[1] = '\0';

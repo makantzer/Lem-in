@@ -6,7 +6,7 @@
 /*   By: mkantzer <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/20 17:57:34 by mkantzer          #+#    #+#             */
-/*   Updated: 2017/07/25 12:42:53 by mkantzer         ###   ########.fr       */
+/*   Updated: 2017/07/30 22:16:05 by mkantzer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,16 +22,42 @@ void	init_info(t_parse *info)
 	info->tube = 0;
 }
 
-int		check_alpha(char *str)
+void	free_wl(t_wait **wl)
 {
-	int i;
+	if ((*wl)->next)
+		free_wl(&((*wl)->next));
+	if (*wl)
+		free(*wl);
+}
 
-	i = 0;
-	while (str[i])
+void	free_link(t_link **link)
+{
+	if ((*link)->next)
+		free_link(&((*link)->next));
+	if (*link)
+		free(*link);
+}
+
+void	free_lstr(t_lstr **lstr)
+{
+	if ((*lstr)->link)
+		free_link(&(*lstr)->link);
+	if ((*lstr)->next)
 	{
-		if (ft_isalpha(str[i]))
-			return (0);
-		i++;
+		free((*lstr)->name);
+		free_lstr(&((*lstr)->next));
 	}
-	return (1);
+	if (*lstr)
+		free(*lstr);
+}
+
+void	free_tab(char **result, int i)
+{
+	while (i >= 0)
+	{
+		ft_strdel(&result[i]);
+		result[i] = NULL;
+		i--;
+	}
+	free(result);
 }

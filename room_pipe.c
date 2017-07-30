@@ -6,7 +6,7 @@
 /*   By: mkantzer <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/20 18:01:42 by mkantzer          #+#    #+#             */
-/*   Updated: 2017/07/22 21:23:59 by mkantzer         ###   ########.fr       */
+/*   Updated: 2017/07/30 22:17:26 by mkantzer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,13 +49,14 @@ int		get_room(t_lstr **lstr, t_lstr **new, char *line)
 		return (0);
 	if (find_room(*lstr, data[0]) != NULL)
 		return (0);
-	(*new)->name = data[0];
+	(*new)->name = ft_strdup(data[0]);
 	if (!(check_alpha(data[1])) || !(check_alpha(data[2])))
 		return (0);
 	(*new)->visit = 0;
 	(*new)->link = NULL;
 	(*new)->coord_x = ft_atoi(data[1]);
 	(*new)->coord_y = ft_atoi(data[2]);
+	free_tab(data, 2);
 	return (1);
 }
 
@@ -74,9 +75,10 @@ int		get_pipe(t_lstr **lstr, char *line)
 		return (0);
 	from = find_room(*lstr, data[0]);
 	to = find_room(*lstr, data[1]);
-	if (find_link(*lstr, from, to) != NULL && find_link(*lstr, to, from) != NULL)
+	if (find_link(*lstr, from, to) != NULL
+			&& find_link(*lstr, to, from) != NULL)
 		return (1);
-	//Verifier avant si from et to existe avant ?
+	free_tab(data, 1);
 	if (from != NULL && to != NULL)
 		add_pipe(lstr, from, to);
 	else
@@ -100,6 +102,20 @@ int		add_pipe(t_lstr **lstr, t_lstr *from, t_lstr *to)
 		if (tmp == to)
 			add_link((&(tmp)->link), link1);
 		tmp = tmp->next;
+	}
+	return (1);
+}
+
+int		check_alpha(char *str)
+{
+	int i;
+
+	i = 0;
+	while (str[i])
+	{
+		if (ft_isalpha(str[i]))
+			return (0);
+		i++;
 	}
 	return (1);
 }

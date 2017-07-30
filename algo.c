@@ -6,7 +6,7 @@
 /*   By: mkantzer <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/22 10:44:18 by mkantzer          #+#    #+#             */
-/*   Updated: 2017/07/30 16:12:48 by mkantzer         ###   ########.fr       */
+/*   Updated: 2017/07/30 22:10:30 by mkantzer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,27 +75,4 @@ t_wait	*create_wl(t_lstr *room, t_wait *origin)
 	new->origin = origin;
 	new->next = NULL;
 	return (new);
-}
-
-void	print_wl(t_wait *wl)
-{
-	t_wait	*tmp;
-	int		i;
-
-	tmp = wl;
-	i = 0;
-	ft_printf("WAITING LIST -----------\n");
-	while (tmp)
-	{
-		ft_printf("NAME = %s\n", tmp->room->name);
-		ft_printf(" Position = %i\n", i);
-		ft_printf(" Wait = %p\n", tmp);
-		ft_printf(" Room = %p\n", tmp->room);
-		ft_printf(" Origin = %p\n", tmp->origin);
-		if (tmp->origin != NULL)
-			ft_printf(" name = %s\n", tmp->origin->room->name);
-		tmp = tmp->next;
-		ft_putchar('\n');
-		i++;
-	}
 }

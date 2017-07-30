@@ -6,7 +6,7 @@
 /*   By: mkantzer <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/06/16 10:50:18 by mkantzer          #+#    #+#             */
-/*   Updated: 2017/07/25 13:57:30 by mkantzer         ###   ########.fr       */
+/*   Updated: 2017/07/30 22:16:57 by mkantzer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,6 @@ int		parse(t_lstr **lstr, t_parse *info)
 	int		ret;
 	char	*line;
 
-	//line = ft_strnew(0);
 	init_info(info);
 	if (nb_ants(info) == 0)
 		return (0);
