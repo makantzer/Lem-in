@@ -6,12 +6,12 @@
 /*   By: mkantzer <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/06/16 10:53:12 by mkantzer          #+#    #+#             */
-/*   Updated: 2017/07/30 22:29:58 by mkantzer         ###   ########.fr       */
+/*   Updated: 2017/07/31 10:42:25 by mkantzer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef LEMIN_H
-# define LEMIN_H
+#ifndef LEM_IN_H
+# define LEM_IN_H
 # include <stdlib.h>
 # include "libft/includes/libft.h"
 # include "libft/includes/ft_printf.h"
